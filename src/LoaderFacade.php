@@ -9,9 +9,9 @@
  * '-------------------------------------------------------------------*/
 namespace houdunwang\loader;
 
-use houdunwang\framework\ServiceFacade;
+use houdunwang\framework\build\Facade;
 
-class LoaderFacade extends ServiceFacade {
+class LoaderFacade extends Facade {
 	public static function getFacadeAccessor() {
 		return 'Loader';
 	}
