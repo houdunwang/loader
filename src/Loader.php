@@ -1,4 +1,6 @@
-<?php namespace houdunwang\framework\loader;
+<?php namespace houdunwang\loader;
+
+use houdunwang\loader\build\Base;
 
 class Loader {
 	protected $link;
@@ -6,6 +8,7 @@ class Loader {
 	//更改缓存驱动
 	protected function driver() {
 		$this->link = new Base();
+
 		return $this;
 	}
 
