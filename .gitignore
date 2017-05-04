@@ -3,5 +3,3 @@
 .DS_Store
 /vendor
 composer.lock
-/attachment
-storage/
