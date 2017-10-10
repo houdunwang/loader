@@ -14,19 +14,17 @@ use houdunwang\framework\build\Provider;
 class LoaderProvider extends Provider
 {
     //延迟加载
-    public $defer = true;
+    public $defer = false;
 
     public function boot()
     {
+        Loader::bootstrap();
     }
 
     public function register()
     {
-        $this->app->single(
-            'Loader',
-            function () {
-                return new Loader();
-            }
-        );
+        $this->app->single('Loader', function () {
+            return new Loader();
+        });
     }
 }

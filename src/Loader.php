@@ -2,35 +2,27 @@
 
 use houdunwang\loader\build\Base;
 
-class Loader {
-	protected $link;
+class Loader
+{
+    protected static $link;
 
-	//更改缓存驱动
-	protected function driver() {
-		$this->link = new Base();
+    public function __call($method, $params)
+    {
+        return call_user_func_array([self::single(), $method], $params);
+    }
 
-		return $this;
-	}
+    //生成单例对象
+    public static function single()
+    {
+        if ( ! self::$link) {
+            self::$link = new Base();
+        }
 
-	public function __call( $method, $params ) {
-		if ( is_null( $this->link ) ) {
-			$this->driver();
-		}
+        return self::$link;
+    }
 
-		return call_user_func_array( [ $this->link, $method ], $params );
-	}
-
-	//生成单例对象
-	public static function single() {
-		static $link;
-		if ( is_null( $link ) ) {
-			$link = new static();
-		}
-
-		return $link;
-	}
-
-	public static function __callStatic( $name, $arguments ) {
-		return call_user_func_array( [ static::single(), $name ], $arguments );
-	}
+    public static function __callStatic($name, $arguments)
+    {
+        return call_user_func_array([static::single(), $name], $arguments);
+    }
 }
